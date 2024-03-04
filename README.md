@@ -1,16 +1,21 @@
-# range_selector
+# Range Selector
 
-A new Flutter project.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Getting Started
+A customizable range selector widget for Flutter.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Select a range of values by dragging the handles.
+- Customize the appearance and behavior of the range selector.
+- Support for different types of ranges (numeric, date, etc.).
+- Callbacks for handling range changes.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Add the following dependency to your `pubspec.yaml` file:
+
+## Demo
+![Demo GIF](demo.gif)
+
+
