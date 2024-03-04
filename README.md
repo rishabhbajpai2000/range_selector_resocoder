@@ -16,6 +16,9 @@ A customizable range selector widget for Flutter.
 Add the following dependency to your `pubspec.yaml` file:
 
 ## Demo
-![Demo GIF](demo.gif)
+https://github.com/rishabhbajpai2000/range_selector_resocoder/assets/64163517/d06c74c3-0ae8-48cf-b3ef-1d6c3d26c780
+
+
+
 
 
