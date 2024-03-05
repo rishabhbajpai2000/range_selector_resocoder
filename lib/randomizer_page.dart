@@ -2,23 +2,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:range_selector/randomizer_change_notifier.dart';
 
-class RandomizerPage extends StatefulWidget {
-  final int min;
-  final int max;
+class RandomizerPage extends StatelessWidget {
   const RandomizerPage({
     Key? key,
-    required this.min,
-    required this.max,
   }) : super(key: key);
 
-  @override
-  State<RandomizerPage> createState() => _RandomizerPageState();
-}
-
-class _RandomizerPageState extends State<RandomizerPage> {
-  int? _generatedNumber;
-  final randomGenerator = Random();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,23 +17,18 @@ class _RandomizerPageState extends State<RandomizerPage> {
         title: const Text('Randomizer'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              _generatedNumber?.toString() ?? "Generate a number",
-              style: TextStyle(fontSize: 42),
-            ),
-          ],
-        ),
+        child: Consumer<RandomizerChangeNotifier>(
+            builder: (context, notifier, child) {
+          return Text(
+            notifier.generatedNumber?.toString() ?? "Generate a number",
+            style: const TextStyle(fontSize: 42),
+          );
+        }),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        label: Text('Generate'),
+        label: const Text('Generate'),
         onPressed: () {
-          setState(() {
-            _generatedNumber = widget.min +
-                randomGenerator.nextInt(widget.max + 1 - widget.min);
-          });
+          context.read<RandomizerChangeNotifier>().generateRandomNumber();
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

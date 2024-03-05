@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:range_selector/randomizer_change_notifier.dart';
 import 'package:range_selector/randomizer_page.dart';
 
-class RangeSelectorPage extends StatefulWidget {
-  const RangeSelectorPage({super.key});
-
-  @override
-  State<RangeSelectorPage> createState() => _RangeSelectorPageState();
-}
-
-class _RangeSelectorPageState extends State<RangeSelectorPage> {
+class RangeSelectorPage extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
-  int _minValue = 0;
-  int _maxValue = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +19,16 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             RangeSelectorTextFormField(
               labelText: "Minimum",
-              intValueSetter: (value) => _minValue = value,
+              intValueSetter: (value) =>
+                  context.read<RandomizerChangeNotifier>().min = value,
             ),
             const SizedBox(
               height: 30,
             ),
             RangeSelectorTextFormField(
               labelText: "Maximum",
-              intValueSetter: (value) => _maxValue = value,
+              intValueSetter: (value) =>
+                  context.read<RandomizerChangeNotifier>().max = value,
             )
           ]),
         ),
@@ -43,10 +39,7 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
             if (formKey.currentState?.validate() == true) {
               formKey.currentState?.save();
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => RandomizerPage(
-                  min: _minValue,
-                  max: _maxValue,
-                ),
+                builder: (context) => RandomizerPage(),
               ));
             }
           }),
