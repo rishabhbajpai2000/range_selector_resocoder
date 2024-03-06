@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:range_selector/main.dart';
+
 import 'package:range_selector/randomizer_change_notifier.dart';
 import 'package:range_selector/randomizer_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RangeSelectorPage extends StatelessWidget {
+class RangeSelectorPage extends ConsumerWidget {
   final formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select Range'),
@@ -20,7 +22,7 @@ class RangeSelectorPage extends StatelessWidget {
             RangeSelectorTextFormField(
               labelText: "Minimum",
               intValueSetter: (value) =>
-                  context.read<RandomizerChangeNotifier>().min = value,
+                  ref.read(randomizerProvider).min = value,
             ),
             const SizedBox(
               height: 30,
@@ -28,7 +30,7 @@ class RangeSelectorPage extends StatelessWidget {
             RangeSelectorTextFormField(
               labelText: "Maximum",
               intValueSetter: (value) =>
-                  context.read<RandomizerChangeNotifier>().max = value,
+                  ref.read(randomizerProvider).max = value,
             )
           ]),
         ),
