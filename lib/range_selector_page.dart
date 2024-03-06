@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:range_selector/main.dart';
 
-import 'package:range_selector/randomizer_change_notifier.dart';
 import 'package:range_selector/randomizer_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RangeSelectorPage extends ConsumerWidget {
   final formKey = GlobalKey<FormState>();
+
+  RangeSelectorPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +23,7 @@ class RangeSelectorPage extends ConsumerWidget {
             RangeSelectorTextFormField(
               labelText: "Minimum",
               intValueSetter: (value) =>
-                  ref.read(randomizerProvider).min = value,
+                  ref.read(randomizerProvider.notifier).setMin(value),
             ),
             const SizedBox(
               height: 30,
@@ -30,7 +31,7 @@ class RangeSelectorPage extends ConsumerWidget {
             RangeSelectorTextFormField(
               labelText: "Maximum",
               intValueSetter: (value) =>
-                  ref.read(randomizerProvider).max = value,
+                  ref.read(randomizerProvider.notifier).setMax(value),
             )
           ]),
         ),
@@ -41,7 +42,7 @@ class RangeSelectorPage extends ConsumerWidget {
             if (formKey.currentState?.validate() == true) {
               formKey.currentState?.save();
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => RandomizerPage(),
+                builder: (context) => const RandomizerPage(),
               ));
             }
           }),
